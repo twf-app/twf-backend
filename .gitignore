@@ -1,0 +1,24 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+private/secrets.py
+.idea/dataSources/5baa6721-46c6-462d-81cf-d9beb2f5f707/_src_/
+.idea/dataSources/5baa6721-46c6-462d-81cf-d9beb2f5f707/_staging_/
+.idea/dataSources/ef36d9fb-86c3-408e-9ff2-e38ac684335b/_src_/
+.idea/dataSources/ef36d9fb-86c3-408e-9ff2-e38ac684335b/_staging_/
+accounts/migrations/
+events/migrations/
+places/migrations/
+private/__pycache__/
+templates/app/
+db.sqlite3
+static/accounts/
+static/events/
+static/places/
+__pycache__/
+accounts/static/img/twf.io.png
+media/user/SA_Profile_Pic.jpg
+media/user/twf.io_ZDtlDeh.png
+/htmlcov/
+.idea/dataSources/1ede15dd-b305-4953-adec-e381aa923e7e.xml
+.idea/dataSources/1ede15dd-b305-4953-adec-e381aa923e7e/
+/.coveragerc

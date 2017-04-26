@@ -1,0 +1,197 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Travel With Friends</title>
+    <link rel="shortcut icon" href="{% static "img/twf.io.png" %}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <script src="{% static "swal/sweetalert2.min.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "swal/sweetalert2.min.css" %}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+    <script
+            src="http://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link href="{% static "css/app.css" %}" type="text/css" rel="stylesheet">
+    <link href="{% static "css/app_ui.css" %}" type="text/css" rel="stylesheet">
+</head>
+<body>
+<!-- /MAIN PAGE-->
+<div data-role="page">
+    <div data-role="header" data-tap-toggle="false" data-theme="a" data-position="fixed">
+        <a><i id="check_in" class="glyphicon glyphicon-check"></i></a>
+        <h1>Travel With Friends</h1>
+        <a href="/logout/" target="_self"><i class="glyphicon glyphicon-log-out"></i></a>
+        <!-- /header -->
+    </div>
+    <div class="ui-content" id="map-canvas">
+    </div>
+    <br>
+    <br>
+    <br>
+    <!-- PROFILE CONTENT -->
+    <div class="ui-body-a" id="profile">
+        <div class="container" role="columnheader">
+            <div class="row profile">
+                <div class="col-md-12">
+                    <div class="profile-sidebar">
+                        <!-- SIDEBAR USERPIC -->
+                        <div class="profile-userpic">
+                            <label for="file-input">
+                                {% if not request.user.image %}
+                                    <img src="{% static "img/test_add_user.png" %}" class="img-responsive">
+                                    <input id="file-input" type="file"/>
+                                {% else %}
+                                    <img src="{{ request.user.image.url }}" class="img-responsive">
+                                {% endif %}
+                            </label>
+                        </div>
+                        <!-- END SIDEBAR USERPIC -->
+                        <!-- SIDEBAR USER TITLE -->
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                {{ request.user.username }}
+                            </div>
+                            <div class="profile-usertitle-job">
+                                {{ request.user.email }}
+                            </div>
+                        </div>
+                        <!-- END SIDEBAR USER TITLE -->
+                        <!-- SIDEBAR BUTTONS -->
+                        <div class="profile-userbuttons">
+                            <button id="follow" type="button" class="btn btn-success btn-sm">Following</button>
+                            <button id="message" type="button" class="btn btn-danger btn-sm">Messages</button>
+                        </div>
+                        <!-- END SIDEBAR BUTTONS -->
+                        <!-- SIDEBAR MENU -->
+                        <div class="profile-usermenu">
+                            <ul class="nav">
+                                <li>
+                                    <a id="#history">
+                                        <i class="glyphicon glyphicon-dashboard"></i>History</a>
+                                </li>
+                                <li>
+                                    <a id="#check_in">
+                                        <i class="glyphicon glyphicon-check"></i>Check-in</a>
+                                </li>
+                                <li>
+                                    <a id="#events">
+                                        <i class="glyphicon glyphicon-calendar"></i>Events</a>
+                                </li>
+                                <li>
+                                    <a id="#uploadImage">
+                                        <i class="glyphicon glyphicon-camera"></i>Upload Photos</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END MENU -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /content -->
+    <br>
+    <br>
+    <br>
+    <!-- SETTINGS CONTENT -->
+    <div class="ui-body-a" id="settings">
+        <div class="profile-content">
+            <ul class="nav">
+                <li>
+                    <form>
+                        <label for="flip-checkbox-1">
+                            <a><i class="glyphicon glyphicon-dashboard"></i></a> Show Profile:</label>
+                        <select name="flip-checkbox-1" id="flip-checkbox-1" data-role="slider" data-mini="true">
+                            {% if request.user.show_profile %}
+                                <option value="on">On</option>
+                            {% else %}
+                                <option value="off">Off</option>
+                            {% endif %}
+                        </select>
+                    </form>
+                </li>
+                <br>
+                <li>
+                    <form>
+                        <label for="flip-checkbox-1">
+                            <a><i class="glyphicon glyphicon-check"></i></a> Show Check-Ins:</label>
+                        <select name="flip-checkbox-1" id="flip-checkbox-1" data-role="slider" data-mini="true">
+                            {% if request.user.show_check_ins %}
+                                <option value="on">On</option>
+                            {% else %}
+                                <option value="off">Off</option>
+                            {% endif %}
+                        </select>
+                    </form>
+                </li>
+                <li>
+                    <form>
+                          <label for="flip-checkbox-1">
+                        <a><i class="glyphicon glyphicon-calendar"></i></a> Show Events:</label>
+                        <select name="flip-checkbox-1" id="flip-checkbox-1" data-role="slider" data-mini="true">
+                            {% if request.user.show_events %}
+                                <option value="on">On</option>
+                            {% else %}
+                                <option value="off">Off</option>
+                            {% endif %}
+                        </select>
+                    </form>
+                </li>
+                <li>
+                    <form>
+                            <label for="flip-checkbox-1">
+                        <a><i class="glyphicon glyphicon-camera"></i></a> Show Your Images:</label>
+                        <select name="flip-checkbox-1" id="flip-checkbox-1" data-role="slider" data-mini="true">
+                            {% if request.user.show_images %}
+                                <option value="on">On</option>
+                            {% else %}
+                                <option value="off">Off</option>
+                            {% endif %}
+                        </select>
+                    </form>
+                </li>
+                <li>
+                    <form>
+                            <label for="flip-checkbox-1">
+                        <a><i class="glyphicon glyphicon-phone"></i></a> Show Contact Method:</label>
+                        <select name="flip-checkbox-1" id="flip-checkbox-1" data-role="slider" data-mini="true">
+                            {% if request.user.show_contact_method %}
+                                <option value="on">On</option>
+                            {% else %}
+                                <option value="off">Off</option>
+                            {% endif %}
+                        </select>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div data-role="footer" data-tap-toggle="false" data-theme="a" data-position="fixed">
+        <div data-role="navbar" data-iconpos="bottom">
+            <ul>
+                <li><a href="#map-canvas" onclick="$.mobile.silentScroll(0)" data-icon="navigation">My Location</a></li>
+                <li><a href="#profile" onclick="$.mobile.silentScroll(650)" data-icon="user">My Profile</a></li>
+                <li><a href="#settings" onclick="$.mobile.silentScroll(1300)" data-icon="gear">Settings</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /footer -->
+    <br>
+
+    <script src="{% static "js/app.js" %}" type="application/javascript"></script>
+    <script src="{% static "js/app_ui.js" %}" type="application/javascript"></script>
+{#    <script src="{% static "js/infobox.js" %}" type="application/javascript/javascript"></script>#}
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfr-G5gPX-mXDbH-GIj9puZtXa9TELc5A
+        &callback=app">
+    </script>
+    <script src="{% static "csrf.js" %}" type="application/javascript"></script>
+</body>
+</html>
