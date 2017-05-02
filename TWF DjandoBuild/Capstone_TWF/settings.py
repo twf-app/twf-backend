@@ -108,8 +108,13 @@ GOOGLE_PLACES_API_KEY = 'AIzaSyAxh2DBPm0WjGhaXBBZEQOgg3UbFij3lrY',
 
 # DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
 
+
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'development',
+    },
+    'postgres': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Capstone_TWF',
         'USER': 'twf_admin',
@@ -180,17 +185,17 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # EMAIL SETTINGS
-from private.secrets import GMAIL_PASSWORD
-
-DEFAULT_FROM_EMAIL = 'ajorve@gmail.com'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ajorve'
-EMAIL_HOST_PASSWORD = GMAIL_PASSWORD
-EMAIL_PORT = 587
-EMAIL_SUBJECT_PREFIX = 'From Travel With Friends App!'
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+# from private.secrets import GMAIL_PASSWORD
+#
+# DEFAULT_FROM_EMAIL = 'ajorve@gmail.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'ajorve'
+# EMAIL_HOST_PASSWORD = GMAIL_PASSWORD
+# EMAIL_PORT = 587
+# EMAIL_SUBJECT_PREFIX = 'From Travel With Friends App!'
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
 
 # Login Redirect Url
 
