@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{index}" />
-    <file url="PROJECT" libraries="{angular, bootstrap, html5shiv, index, jquery, jquery-1.11.1, jquery-3.1.1, jquery-latest, jquery.magnific-popup, jquery.mobile-1.4.5, jquery.validate, lodash, respond}" />
-    <includedPredefinedLibrary name="WebGL" />
-  </component>
-</project>
