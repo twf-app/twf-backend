@@ -18,7 +18,7 @@ class Member(AbstractUser):
     """
 
     # Additional Member Information:
-    phone_number = models.IntegerField()  # TODO: Get better phone number validation information.
+    phone_number = models.IntegerField(null=True, blank=True)  # TODO: Get better phone number validation information.
     # home_location = GeopositionField(null=False)
     profile_picture = models.ImageField(upload_to='user', null=True)
     

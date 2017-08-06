@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOCAL_PATH = '/Users/alexanderwarnes/Documents/abw_codes/Git/twf-app/twf/twf/'
 
 # Application definition
 

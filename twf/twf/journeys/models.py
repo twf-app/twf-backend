@@ -17,8 +17,6 @@ class Journey(models.Model):
     name = models.CharField(max_length=1024)
     description = models.TextField()
     
-    reviews = models.ManyToManyField('activities.Review')
-    journal_entries = models.ManyToManyField('activities.JournalEntry')
     check_ins = models.DateTimeField()
     
     # zone = models.ManyToManyField('places.Zone', related_name='zones', blank=True) Not using zones anymore?
